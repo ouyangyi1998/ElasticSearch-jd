@@ -19,12 +19,12 @@ ElasticSearch-analysis-ik-7.6.2
 4.http://localhost:9090 测试项目ES搜索功能
 
 ### 开发要点
-1.es的默认分词器为standard，不支持中文分词，需要配置ik分词器，同时进行数字+中文或者中文+英文的分词存在问题
-2.一段时候搜索次数太多，疑似会引发jd的防爬虫机制，会出现搜索结果不完整的情况
-3.爬虫机制通过构建url，获取到jd的搜索结果html（jd没有要求强制登录)通过构造jsoup的element来获取到商品的信息，然后把它们放入容器
-4.先通过构造bulkrequest，后面利用循环把indexrequest每一个分装好的商品装配上,最后通过restHighLevelClient把商品集中注入es
+1. es的默认分词器为standard，不支持中文分词，需要配置ik分词器，同时进行数字+中文或者中文+英文的分词存在问题
+2. 一段时候搜索次数太多，疑似会引发jd的防爬虫机制，会出现搜索结果不完整的情况
+3. 爬虫机制通过构建url，获取到jd的搜索结果html（jd没有要求强制登录)通过构造jsoup的element来获取到商品的信息，然后把它们放入容器
+4. 先通过构造bulkrequest，后面利用循环把indexrequest每一个分装好的商品装配上,最后通过restHighLevelClient把商品集中注入es
 
 ### 搜索机制
-1.先配置searchrequest，同时指定文档仓库 ”jd_goods"
-2.在配置searchsourcebuilder（建造者模式），这里配置分页和匹配机制，然后注入searchrequest
-3.最后解析结果，构造arraylist<map<string,object>>
+1. 先配置searchrequest，同时指定文档仓库 ”jd_goods"
+2. 在配置searchsourcebuilder（建造者模式），这里配置分页和匹配机制，然后注入searchrequest
+3. 最后解析结果，构造arraylist<map<string,object>>
